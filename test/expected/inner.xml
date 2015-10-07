@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<metadata>
-    <groupId>grunt-nexus-deployer</groupId>
-    <artifactId>grunt-nexus-deployer</artifactId>
+<metadata modelVersion="1.1.0">
+    <groupId>grunt-nexus-deployer-versioned</groupId>
+    <artifactId>grunt-nexus-deployer-versioned</artifactId>
     <version>1.2</version>
     <versioning>
         <lastUpdated>11111111111111</lastUpdated>
+        <snapshotVersions>
+            <snapshotVersion>
+                <extension>zip</extension>
+                <value>1.0-test-1</value>
+                <updated>11111111111111</updated>
+            </snapshotVersion>
+        </snapshotVersions>
     </versioning>
 </metadata>

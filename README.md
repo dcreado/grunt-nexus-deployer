@@ -2,46 +2,48 @@
 
 > Nexus Artifact Deployer from grunt
 
-[![Build Status](https://travis-ci.org/skhatri/grunt-nexus-deployer.png)](https://travis-ci.org/skhatri/grunt-nexus-deployer) 
-[![NPM version](https://badge.fury.io/js/grunt-nexus-deployer.png)](http://npmjs.org/package/grunt-nexus-deployer)
-[![Dependency Status](https://david-dm.org/skhatri/grunt-nexus-deployer.png)](https://david-dm.org/skhatri/grunt-nexus-deployer)
+[![Build Status](https://travis-ci.org/edieval/grunt-nexus-deployer.png)](https://travis-ci.org/edieval/grunt-nexus-deployer)
+[![NPM version](https://badge.fury.io/js/grunt-nexus-deployer-versioned.png)](http://npmjs.org/package/grunt-nexus-deployer-versioned)
+[![Dependency Status](https://david-dm.org/edieval/grunt-nexus-deployer.png)](https://david-dm.org/edieval/grunt-nexus-deployer)
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-nexus-deployer --save-dev
+npm install grunt-nexus-deployer-versioned --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-nexus-deployer');
+grunt.loadNpmTasks('grunt-nexus-deployer-versioned');
 ```
 
-## The "nexusDeployer" task
+## The "nexusDeployerVersioned" task
 
 ### Overview
-In your project's Gruntfile, add a section named `nexusDeployer` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `nexusDeployerVersioned` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  nexusDeployer: {
+  nexusDeployerVersioned: {
     release: {
       options: {
-		  groupId: "grunt-nexus-deployer",
-		  artifactId: "grunt-nexus-deployer",
+		  groupId: "grunt-nexus-deployer-versioned",
+		  artifactId: "grunt-nexus-deployer-versioned",
 		  version: "1.0",
+		  versionNumber: "1.0",
+          build:"1",
 		  packaging: 'zip',
-                  classifier: 'dev',
+          classifier: 'dev',
 		  auth: {
 			username:'admin',
 			password:'admin123'
 		  },
 		  pomDir: 'build/pom',
 		  url: 'http://localhost:9220/nexus/content/repositories/releases',
-		  artifact: 'build/grunt-nexus-deployer.zip',
+		  artifact: 'build/grunt-nexus-deployer-versioned.zip',
 		  noproxy: 'localhost',
 		  cwd: ''
 		}
@@ -146,11 +148,11 @@ Deploy to release repository
 
 ```js
 grunt.initConfig({
-  nexusDeployer: {
+  nexusDeployerVersioned: {
     release: {
       options: {
-		  groupId: "grunt-nexus-deployer",
-		  artifactId: "grunt-nexus-deployer",
+		  groupId: "grunt-nexus-deployer-versioned",
+		  artifactId: "grunt-nexus-deployer-versioned",
 		  version: "1.0",
 		  packaging: 'zip',
 		  auth: {
@@ -159,7 +161,7 @@ grunt.initConfig({
 		  },
 		  pomDir: 'build/pom',
 		  url: 'http://localhost:8081/nexus/content/repositories/releases',
-		  artifact: 'build/grunt-nexus-deployer.zip',
+		  artifact: 'build/grunt-nexus-deployer-versioned.zip',
 		  noproxy: 'localhost',
 		  cwd: ''
 		}
@@ -172,12 +174,17 @@ Deploy to snapshots repository
 
 ```js
 grunt.initConfig({
-  nexusDeployer: {
+  nexusDeployerVersioned: {
     release: {
       options: {
-		  groupId: "grunt-nexus-deployer",
-		  artifactId: "grunt-nexus-deployer",
+		  groupId: "grunt-nexus-deployer-versioned",
+		  artifactId: "grunt-nexus-deployer-versioned",
 		  version: "1.0-SNAPSHOT",
+		  versioned: {
+			  build: '1',
+			  versionNumber:'1.0',
+			  classifier: "test"
+		  },
 		  packaging: 'zip',
 		  auth: {
 			username:'admin',
@@ -185,7 +192,7 @@ grunt.initConfig({
 		  },
 		  pomDir: 'build/pom',
 		  url: 'http://localhost:8081/nexus/content/repositories/snapshots',
-		  artifact: 'build/grunt-nexus-deployer.zip',
+		  artifact: 'build/grunt-nexus-deployer-versioned.zip',
 		  noproxy: 'localhost',
 		  cwd: '',
 		  parallel:false,
@@ -198,7 +205,7 @@ grunt.initConfig({
 
 To run
 ```
-grunt nexusDeployer
+grunt nexusDeployerVersioned
 ```
 
 ## Release History

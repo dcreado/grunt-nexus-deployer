@@ -116,15 +116,17 @@ var createAndUploadArtifacts = function (options, done) {
         uploads[pomDir + "/inner.xml.md5"] = groupArtifactVersionPath + '/' + 'maven-metadata.xml.md5';
     }
 
-    var remoteArtifactName = options.artifactId + '-' + options.version;
+    var remoteArtifactName = options.artifactId;
+    if(options.versioned) {
+        remoteArtifactName = remoteArtifactName + "-" + options.versioned.versionNumber + "-" + options.versioned.classifier + "-" + options.versioned.build;
+    } else {
+        remoteArtifactName = remoteArtifactName + '-' + options.version;
+    }
+
     uploads[pomDir + "/pom.xml"] = groupArtifactVersionPath + '/' + remoteArtifactName + '.pom';
     uploads[pomDir + "/pom.xml.sha1"] = groupArtifactVersionPath + '/' + remoteArtifactName + '.pom.sha1';
     uploads[pomDir + "/pom.xml.md5"] = groupArtifactVersionPath + '/' + remoteArtifactName + '.pom.md5';
 
-
-    if(options.classifier) {
-        remoteArtifactName = remoteArtifactName + "-" + options.classifier;
-    }
     uploads[options.artifact] = groupArtifactVersionPath + '/' + remoteArtifactName + '.' + options.packaging;
     uploads[pomDir + "/artifact." + options.packaging + ".sha1"] = groupArtifactVersionPath + '/' + remoteArtifactName + '.' + options.packaging + '.sha1';
     uploads[pomDir + "/artifact." + options.packaging + ".md5"] = groupArtifactVersionPath + '/' + remoteArtifactName + '.' + options.packaging + '.md5';
@@ -158,5 +160,8 @@ module.exports = function (options, cb) {
     }
     exec = process.env.MOCK_NEXUS ? require('./mockexec') : require('child_process').exec;
     options.lastUpdated = process.env.MOCK_NEXUS ? '11111111111111': dateformat(new Date(), "yyyymmddHHMMss");
+    if(!options.versioned) {
+        options.versioned = undefined;
+    }
     createAndUploadArtifacts(options, cb);
 };

@@ -1,8 +1,8 @@
 /*
- * grunt-nexus-deployer
- * https://github.com/skhatri/grunt-nexus-deployer
+ * grunt-nexus-deployer-versioned
+ * https://github.com/edieval/grunt-nexus-deployer
  *
- * Copyright (c) 2014 Suresh Khatri
+ * Copyright (c) 2014 Emmanuel Dieval
  * Licensed under the MIT license.
  */
 
@@ -35,11 +35,11 @@ module.exports = function (grunt) {
         },
 
         // Configuration to be run (and then tested).
-        nexusDeployer: {
+        nexusDeployerVersioned: {
             snapshot: {
                 options: {
-                    groupId: "grunt-nexus-deployer",
-                    artifactId: "grunt-nexus-deployer",
+                    groupId: "grunt-nexus-deployer-versioned",
+                    artifactId: "grunt-nexus-deployer-versioned",
                     version: "1.2-SNAPSHOT",
                     packaging: 'zip',
                     auth: {
@@ -57,10 +57,15 @@ module.exports = function (grunt) {
             },
             release: {
                 options: {
-                    groupId: "grunt-nexus-deployer",
-                    artifactId: "grunt-nexus-deployer",
-                    version: "1.2",
+                    groupId: "grunt-nexus-deployer-versioned",
+                    artifactId: "grunt-nexus-deployer-versioned",
+                    version: '1.2',
                     packaging: 'zip',
+                    versioned: {
+                        build: '1',
+                        versionNumber:'1.0',
+                        classifier: "test"
+                    },
                     auth: {
                         username: auth.username,
                         password: auth.password
@@ -94,7 +99,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-env');
 
-    grunt.registerTask('test', ['clean', 'env:mock', 'nexusDeployer:snapshot', 'nexusDeployer:release', 'mochaTest']);
+    grunt.registerTask('test', ['clean', 'env:mock', 'nexusDeployerVersioned:snapshot', 'nexusDeployerVersioned:release', 'mochaTest']);
 
     grunt.registerTask('default', ['jshint', 'test']);
 

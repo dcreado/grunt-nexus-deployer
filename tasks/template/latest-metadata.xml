@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<metadata>
+<metadata modelVersion="1.1.0">
     <groupId><%= groupId %></groupId>
     <artifactId><%= artifactId %></artifactId>
     <version><%= version %></version>
     <versioning>
         <lastUpdated><%= lastUpdated %></lastUpdated>
+        <% if(versioned != undefined) { %>
+        <snapshotVersions>
+            <snapshotVersion>
+                <extension><%= packaging %></extension>
+                <value><%= versioned.versionNumber %>-<%= versioned.classifier %>-<%= versioned.build %></value>
+                <updated><%= lastUpdated %></updated>
+            </snapshotVersion>
+        </snapshotVersions>
+        <% } %>
     </versioning>
 </metadata>

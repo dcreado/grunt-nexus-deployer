@@ -69,8 +69,8 @@ describe('Nexus Deployer', function () {
         });
 		
 		it('inner.xml should be generated correctly', function() {
-			var expected = fs.readFileSync('test/expected/inner.xml', 'utf8');
-			var actual = fs.readFileSync('test/pom/inner.xml', 'utf8');
+			var expected = fs.readFileSync('test/expected/inner.xml', 'utf8').replace(/(\n|\t|\s+)/gm, '');
+			var actual = fs.readFileSync('test/pom/inner.xml', 'utf8').replace(/(\n|\t|\s+)/gm, '');
 			actual.should.equal(expected);
 		});
 		
